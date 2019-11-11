@@ -5,6 +5,7 @@ import com.example.DemoGraphQL.model.Author;
 import com.example.DemoGraphQL.model.Book;
 import com.example.DemoGraphQL.repository.AuthorRepository;
 import com.example.DemoGraphQL.repository.BookRepository;
+import org.springframework.data.domain.PageRequest;
 
 public class Query implements GraphQLQueryResolver {
     private BookRepository bookRepository;
@@ -15,12 +16,10 @@ public class Query implements GraphQLQueryResolver {
         this.bookRepository = bookRepository;
     }
 
-    public Iterable<Book> findAllBooks() {
-        return bookRepository.findAll();
-    }
+    public Iterable<Book> findAllBooks() { return bookRepository.findAll(PageRequest.of(0, 2)); }
 
     public Iterable<Author> findAllAuthors() {
-        return authorRepository.findAll();
+        return authorRepository.findAll(PageRequest.of(1, 2));
     }
 
     public long countBooks() {

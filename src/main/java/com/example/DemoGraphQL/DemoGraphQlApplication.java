@@ -54,7 +54,7 @@ public class DemoGraphQlApplication {
 	}
 
 	@Bean
-	public BookResolver authorResolver(AuthorRepository authorRepository) {
+	public BookResolver bookResolver(AuthorRepository authorRepository) {
 		return new BookResolver(authorRepository);
 	}
 
@@ -72,7 +72,15 @@ public class DemoGraphQlApplication {
 	public CommandLineRunner demo(AuthorRepository authorRepository, BookRepository bookRepository) {
 		return (args) -> {
 			Author author = new Author("Herbert", "Schildt");
+			Author author2 = new Author("William", "Shakespear");
+			Author author3 = new Author("Maya", "Angelou");
+			Author author4 = new Author("Toni", "Morrison");
+			Author author5 = new Author("David", "Foster Wallace");
 			authorRepository.save(author);
+			authorRepository.save(author2);
+			authorRepository.save(author3);
+			authorRepository.save(author4);
+			authorRepository.save(author5);
 
 			bookRepository.save(new Book("Java: A Beginner's Guide, Sixth Edition", "0071809252", 728, author));
 		};
